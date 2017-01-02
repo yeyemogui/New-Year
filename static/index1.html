@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html lang="zh-cn">
+<head>
+    <title>Small Cell Festival</title>
+    <link rel="stylesheet" href="Nivo/themes/default/default.css" type="text/css" media="screen" /> 
+    <link rel="stylesheet" href="Nivo/themes/light/light.css" type="text/css" media="screen" /> 
+    <link rel="stylesheet" href="Nivo/themes/dark/dark.css" type="text/css" media="screen" />
+     <link rel="stylesheet" href="Nivo/themes/bar/bar.css" type="text/css" media="screen" /> 
+    <link rel="stylesheet" href="Nivo/nivo-slider.css" type="text/css" media="screen" /> 
+    <link rel="stylesheet" href="Nivo/style.css" type="text/css" media="screen" />
+
+    <link rel="stylesheet" href="lottery-start.css" type="text/css" charset="utf-8">
+    <style>
+    .slider-wrapper {
+        position: absolute;
+        max-width: 800px;
+
+
+        /* width: 80%; */
+        left:10%;
+        right: 10%;
+        margin:0 auto;
+    }
+
+    .blur {
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -ms-filter: blur(5px);
+        filter: blur(5px);
+    }
+    .top-banner{
+        background-color: #333;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="slider-wrapper theme-default" id="wmq">
+            <div id="slider" class="nivoSlider">
+
+            </div>
+            <div id="htmlcaption" class="nivo-html-caption">
+                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>. 
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="Nivo/scripts/jquery-1.9.0.min.js"></script>
+    <script src="API.js"></script>
+    <script type="text/javascript">
+        var shuffle = function(arr){
+            for(var j, x, i = arr.length; i; j = parseInt(Math.random() * i, 10), x = arr[--i], arr[i] = arr[j], arr[j] = x);
+            return arr;
+        };
+
+        API.get("employee", function(data){
+            _employeeList = data;
+            _employeeList = shuffle(_employeeList);
+            $("#slider").empty();
+            for (employee in _employeeList){
+                var im = '<img src="avatar/?.jpg"  alt="" data-transition="slideInLeft" title="?-?"/>'
+                im = im.replace(/\?/, _employeeList[employee].num)
+                im = im.replace(/\?/, _employeeList[employee].name)
+                im = im.replace(/\?/, _employeeList[employee].num)
+                $("#slider").append(im)
+
+            }
+           /* $("#wmq").addClass("blur");*/
+            $('#slider').nivoSlider();
+        });
+    </script>
+    <script type="text/javascript" src="Nivo/jquery.nivo.slider.js"></script>
+    <script type="text/javascript">
+    $(window).load(function() {
+
+    });
+    </script>
+    <canvas width="1920" height="1080" style="position: absolute;z-index: 10;top:0px;left: 0px;"></canvas>
+    <script src="lib/jquery.let_it_snow.min.js"></script>
+    <script>
+        /*var snow = function(){
+            $("canvas").let_it_snow({
+                windPower: 3,
+                speed: 1,
+                count: 50,
+                size: 10,
+                image: "/image/white-snowflake.png"
+            });
+        };
+        snow()*/
+    </script>
+</body>
+</html>
